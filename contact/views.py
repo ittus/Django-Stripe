@@ -6,6 +6,9 @@ from django.conf import settings
 # Create your views here.
 def contact(request):
     form = ContactForm(request.POST or None)
+    title = "Contact us"
+    # context = {'title': title, 'form': form}
+    confirm_message = None
     if form.is_valid():
         print(form.cleaned_data['email'])
         subject = "Message from djangostripe.com"
@@ -21,6 +24,10 @@ def contact(request):
             [email_to],
             fail_silently=False,
         )
-    context = locals()
+        title = "Thank you"
+        confirm_message = "Thank you for contacting us"
+        form = None
+    context = {'title': title, 'confirm_message': confirm_message, 'form': form}
+    # context = locals()
     template = 'contact.html'
     return render(request, template, context)
