@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'stripeproj',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -63,7 +64,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'stripe.urls'
+ROOT_URLCONF = 'stripeproj.urls'
 
 TEMPLATES = [
     {
@@ -80,12 +81,13 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'django.template.context_processors.csrf'
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'stripe.wsgi.application'
+WSGI_APPLICATION = 'stripeproj.wsgi.application'
 
 
 # Database
@@ -180,3 +182,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 6
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+# Stripe Stuff
+STRIPE_PUBLISHABLE_KEY = 'pk_test_D6e220mp4NAf1mEkHoEMEYiz'
+STRIPE_SECRET_KEY = 'sk_test_owm3Fn4EifTJYxGv6gTUlgC5'
