@@ -11,12 +11,15 @@ def checkout(request):
     public_key = settings.STRIPE_PUBLIC_KEY
     if request.method == 'POST':
         token = request.POST['stripeToken']
+        customer_id = request.user.userstripe.stripe_id
         print(token)
         try:
+            customer = stripe.Customer.retrieve(customer_id)
+            customer.cards.create(token)
             charge = stripe.Charge.create(
               amount=1000, # amount in cents, again
               currency="usd",
-              source=token,
+              customer=customer,
               description="Test Product"
             )
         # except stripelib.error.CardError as e:
